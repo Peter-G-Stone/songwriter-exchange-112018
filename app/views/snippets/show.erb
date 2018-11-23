@@ -4,9 +4,12 @@
 
 <form action="/snippets/<%= @snippet.id %>" method="post">
     <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete snippet">
+    <input type="submit" value="Delete Snippet">
 </form>
 
-<p><a href="/snippets/<%= @snippet.id %>/edit">Edit snippet</a></p>
+<form action="/snippets/<%= @snippet.id %>/edit" method="get">
+    
+    <input type="submit" value="Edit Snippet">
+</form>
 
 
