@@ -1,4 +1,77 @@
-class SnippetsController < ApplicationController
+class snippetsController < ApplicationController
+    get '/snippets' do
+        redirect '/login' if !logged_in?
+        @user = current_user
+        @snippets = snippet.all
+        erb :'/snippets/index'
+    end
+
+    get '/snippets/new' do
+        if logged_in?
+            erb :'snippets/new' 
+        else
+            redirect '/login'
+        end
+    end
+
+    post '/snippets' do 
+        snippet = current_user.snippets.build(content: params[:content])
+        
+        if snippet.save
+            redirect '/snippets'
+        else
+            session[:temp_errors] = snippet.errors.full_messages
+            redirect '/snippets/new'
+        end
+    end
+
+    get '/snippets/:id' do 
+        if logged_in?
+            @snippet = snippet.find_by_id(params[:id])
+            erb :'/snippets/show'
+        else
+            redirect '/login'
+        end
+    end
 
 
+    get '/snippets/:id/edit' do 
+        if logged_in? 
+            user = snippet.find_by_id(params[:id]).user
+            if user.id == current_user.id
+                @snippet = snippet.find_by_id(params[:id])
+                erb :'/snippets/edit'
+            else
+                session[:temp_errors] = ["This snippet belongs to another user."]
+                redirect '/snippets'
+            end
+        else
+            session[:temp_errors] = ["You must be logged in to view that."]
+            redirect "/login"
+        end
+    end
+
+    patch '/snippets/:id' do 
+        @snippet = snippet.find_by_id(params[:id])
+        params.delete("_method")
+        if @snippet.update(params)
+            redirect "/snippets/#{@snippet.id}"
+        else
+            session[:temp_errors] = @snippet.errors.full_messages
+            redirect "/snippets/#{@snippet.id}/edit"
+        end
+    end
+
+    delete '/snippets/:id' do 
+        user = snippet.find_by_id(params[:id]).user
+        if current_user == user         
+            @snippet = snippet.find_by_id(params[:id])
+            @snippet.destroy
+            session[:temp_errors] = ["Your snippet was deleted successfully."]
+            redirect '/snippets'
+        else
+            session[:temp_errors] = ["This snippet belongs to another user."]
+            redirect '/snippets'
+        end
+    end
 end
