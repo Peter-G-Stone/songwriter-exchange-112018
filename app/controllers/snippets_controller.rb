@@ -1,8 +1,8 @@
-class snippetsController < ApplicationController
+class SnippetsController < ApplicationController
     get '/snippets' do
         redirect '/login' if !logged_in?
         @user = current_user
-        @snippets = snippet.all
+        @snippets = Snippet.all
         erb :'/snippets/index'
     end
 
@@ -27,7 +27,7 @@ class snippetsController < ApplicationController
 
     get '/snippets/:id' do 
         if logged_in?
-            @snippet = snippet.find_by_id(params[:id])
+            @snippet = Snippet.find_by_id(params[:id])
             erb :'/snippets/show'
         else
             redirect '/login'
@@ -37,9 +37,9 @@ class snippetsController < ApplicationController
 
     get '/snippets/:id/edit' do 
         if logged_in? 
-            user = snippet.find_by_id(params[:id]).user
+            user = Snippet.find_by_id(params[:id]).user
             if user.id == current_user.id
-                @snippet = snippet.find_by_id(params[:id])
+                @snippet = Snippet.find_by_id(params[:id])
                 erb :'/snippets/edit'
             else
                 session[:temp_errors] = ["This snippet belongs to another user."]
@@ -52,7 +52,7 @@ class snippetsController < ApplicationController
     end
 
     patch '/snippets/:id' do 
-        @snippet = snippet.find_by_id(params[:id])
+        @snippet = Snippet.find_by_id(params[:id])
         params.delete("_method")
         if @snippet.update(params)
             redirect "/snippets/#{@snippet.id}"
@@ -63,9 +63,9 @@ class snippetsController < ApplicationController
     end
 
     delete '/snippets/:id' do 
-        user = snippet.find_by_id(params[:id]).user
+        user = Snippet.find_by_id(params[:id]).user
         if current_user == user         
-            @snippet = snippet.find_by_id(params[:id])
+            @snippet = Snippet.find_by_id(params[:id])
             @snippet.destroy
             session[:temp_errors] = ["Your snippet was deleted successfully."]
             redirect '/snippets'

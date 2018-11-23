@@ -2,8 +2,8 @@
 
 <h4>Welcome, <%= @user.username %>!</h4>
 
-<% @user.snippets.reverse_each do |t| %>
+<% @user.snippets.reverse_each do |s| %>
     <h4>------------------------</h4>
-    <h4><%= t.user.username %> wrote...</h4>
+    <h4><%= s.user.username %> wrote...</h4>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= t.content %></p>
 <% end %>
