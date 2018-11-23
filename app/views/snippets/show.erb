@@ -1,0 +1,12 @@
+<h4><%= @snippet.user.username %> wrote... </h4>
+
+<p>&nbsp;&nbsp;&nbsp;<%= @snippet.content %> </p>
+
+<form action="/snippets/<%= @snippet.id %>" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete snippet">
+</form>
+
+<p><a href="/snippets/<%= @snippet.id %>/edit">Edit snippet</a></p>
+
+
