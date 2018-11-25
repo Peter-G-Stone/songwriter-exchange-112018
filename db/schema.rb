@@ -14,7 +14,11 @@
 ActiveRecord::Schema.define(version: 20181120141232) do
 
   create_table "snippets", force: :cascade do |t|
-    t.string   "content"
+    t.string   "title"
+    t.string   "sheet_music"
+    t.string   "audio_file"
+    t.text     "lyric_idea"
+    t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
