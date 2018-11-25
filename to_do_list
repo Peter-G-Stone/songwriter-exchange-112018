@@ -1,14 +1,6 @@
-add more types of data to the snippets
-    add migration
-        Sheet Music
-        Audio File
-        Lyric Idea
-        Description -- instrumentation/vibe/tempo
-
-    change snippet index page
-    change snippet show page
-    change snippet edit page
+add more types of data to the snippets    
     change snippet new page 
+    change controllers to accept new data
 
 add user's friends
     add migration 

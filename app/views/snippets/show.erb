@@ -1,6 +1,22 @@
-<h4><%= @snippet.user.username %> wrote... </h4>
+<h2><%= @snippet.title %> </h2>
 
-<p>&nbsp;&nbsp;&nbsp;<%= @snippet.content %> </p>
+<p><h4>&nbsp;&nbsp;&nbsp;By: <%= @snippet.user.username %> </h4></p>
+
+<p><%= @snippet.brief %></p>
+<% if @snippet.chart && !@snippet.chart.empty? %>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Sheet Music:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/sheet-music/<%= @snippet.chart %>" alt="alttext"></p>
+<% end %>
+
+<% if @snippet.audio && !@snippet.audio.empty? %>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Audio:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<%= @snippet.audio %></p>
+<% end %>
+
+<% if @snippet.lyrics && !@snippet.lyrics.empty? %>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Lyrics:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<%= @snippet.lyrics %></p>
+<% end %>
 
 <form action="/snippets/<%= @snippet.id %>" method="post">
     <input type="hidden" id="hidden" name="_method" value="delete">

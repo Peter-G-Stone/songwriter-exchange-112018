@@ -1,6 +1,4 @@
 class Snippet < ActiveRecord::Base
     belongs_to :user
-
-    validates :title, :description, presence: true
-
+    validates :title, :brief, presence: true
 end

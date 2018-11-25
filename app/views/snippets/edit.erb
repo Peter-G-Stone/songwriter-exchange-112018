@@ -1,7 +1,16 @@
 <h1> Edit a Snippet</h1>
+<h2><%= @snippet.title %></h2>
 <form method="POST" action="/snippets/<%= @snippet.id %>">
     <input type="hidden" id="hidden" name="_method" value="PATCH">
 
-    <textarea   name="content" ><%= @snippet.content %></textarea>
+    <p><label for="brief" >Description: <textarea   name="brief" ><%= @snippet.brief %></textarea></label></p>
+
+    <p><label for="chart">Chart filename: <input type="text" name="chart" id="chart"></label></p>
+
+    <p><label for="audio">Audio filename: <input type="text" name="audio" id="audio"></label></p>
+
+    <p><label for="lyrics" >Lyrics: <textarea   name="lyrics" ></textarea></label></p>
+    
     <input type="submit" value="submit">
 </form>
+
