@@ -22,11 +22,15 @@
 
 
         <form method="post" action="/snippets">
-            <p>Content: </p>
-            <label for="content">
-            <textarea rows="4" cols="50" name="content" id="content" > </textarea>
-            </label>
+            <p>Title: <br><input type="text" name="title"  id="title"></p>
 
+             <p>Description: <br><textarea   rows="4" cols="50"  name="brief" ></textarea></p>
+
+            <p>Chart filename: <br><input type="text" name="chart" id="chart" ></p>
+
+            <p>Audio filename: <br><input type="text" name="audio" id="audio" ></p>
+
+            <p>Lyrics: <br><textarea   rows="4" cols="50"  name="lyrics" ></textarea></p>
             <input type="submit" value="submit">
         </form>
     </body>

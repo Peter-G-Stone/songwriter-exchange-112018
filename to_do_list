@@ -1,8 +1,10 @@
-add more types of data to the snippets    
-    change snippet new page 
-    change controllers to accept new data
+make edit and delete buttons dependent on which user is logged in 
 
-add user's friends
+
+
+audio??
+
+???????add user's friends
     add migration 
     join table?
     add friends index page 

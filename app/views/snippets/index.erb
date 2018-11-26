@@ -10,26 +10,30 @@
 <h4>Welcome, <%= @user.username %>!</h4>
 
 <% @snippets.reverse_each do |s| %>
-    <h1>------------------------</h1>
-    <h4><%= s.user.username %></h4>
     
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/snippets/<%= s.id %>"><%= s.title %></a></p>
-    
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.brief %></p>
-    <% if s.chart && !s.chart.empty? %>
-    <p><h4>&nbsp;&nbsp;&nbsp;&nbsp;Sheet Music:</h4></p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/sheet-music/<%= s.chart %>" alt="alttext"></p>
-    <% end %>
+    <% if s.user.username != @user.username %>
+        <h1>------------------------</h1>
+        <h4><%= s.user.username %></h4>
+        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/snippets/<%= s.id %>"><%= s.title %></a></p>
+        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.brief %></p>
+        <% if s.chart && !s.chart.empty? %>
+        <p><h4>&nbsp;&nbsp;&nbsp;&nbsp;Sheet Music:</h4></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/sheet-music/<%= s.chart %>" alt="alttext"></p>
+        <% end %>
 
-    <% if s.audio && !s.audio.empty? %>
-    <p><h4>&nbsp;&nbsp;&nbsp;&nbsp;Audio:</h4></p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.audio %></p>
-    <% end %>
+        <% if s.audio && !s.audio.empty? %>
+        <p><h4>&nbsp;&nbsp;&nbsp;&nbsp;Audio:</h4></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.audio %></p>
+        <% end %>
 
-    <% if s.lyrics && !s.lyrics.empty? %>
-    <p><h4>&nbsp;&nbsp;&nbsp;&nbsp;Lyrics:</h4></p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.lyrics %></p>
-    <% end %>
+        <% if s.lyrics && !s.lyrics.empty? %>
+        <p><h4>&nbsp;&nbsp;&nbsp;&nbsp;Lyrics:</h4></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.lyrics %></p>
+        <% end %>
 
+        <p><h4><a href="/messagesuccess">Message <%= s.user.username %> to collaborate.</a></h4></p>
+    <% end %>
     
 <% end %>

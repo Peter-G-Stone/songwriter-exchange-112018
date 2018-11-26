@@ -7,6 +7,7 @@ class SnippetsController < ApplicationController
     end
 
     get '/snippets/new' do
+        @user = current_user
         if logged_in?
             erb :'snippets/new' 
         else
@@ -15,7 +16,7 @@ class SnippetsController < ApplicationController
     end
 
     post '/snippets' do 
-        snippet = current_user.snippets.build(content: params[:content])
+        snippet = current_user.snippets.build(params)
         
         if snippet.save
             redirect '/snippets'
@@ -27,6 +28,7 @@ class SnippetsController < ApplicationController
 
     get '/snippets/:id' do 
         if logged_in?
+            @current_user = current_user
             @snippet = Snippet.find_by_id(params[:id])
             erb :'/snippets/show'
         else
@@ -73,5 +75,10 @@ class SnippetsController < ApplicationController
             session[:temp_errors] = ["This snippet belongs to another user."]
             redirect '/snippets'
         end
+    end
+
+    get '/messagesuccess' do 
+        @user = current_user
+        erb :'/snippets/message-success'
     end
 end

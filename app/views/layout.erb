@@ -15,7 +15,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-    <title>Song Snippet Exchange</title>
+    <title>&nbsp;&nbsp;Song Snippet Exchange</title>
 
      
 
@@ -35,7 +35,8 @@
         <nav>
           <ul>
             <% if logged_in? %>
-              <li><a href="/snippets">All Snippets</a></li>
+              <li><a href="/snippets">Browse New Snippets</a></li>
+              <li><a href="/users/<%= @user.slug %>">Your Snippets</a></li>
               <li><a href="/snippets/new">Create a Snippet</a></li>
               <li><a href="/logout">Logout</a></li>
             <% else %>

@@ -1,8 +1,8 @@
 <h2><%= @snippet.title %> </h2>
 
-<p><h4>&nbsp;&nbsp;&nbsp;By: <%= @snippet.user.username %> </h4></p>
+<p><h4>&nbsp;&nbsp;&nbsp;&nbsp;By: <%= @snippet.user.username %> </h4></p>
 
-<p><%= @snippet.brief %></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<%= @snippet.brief %></p>
 <% if @snippet.chart && !@snippet.chart.empty? %>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Sheet Music:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/sheet-music/<%= @snippet.chart %>" alt="alttext"></p>
@@ -18,14 +18,17 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= @snippet.lyrics %></p>
 <% end %>
 
-<form action="/snippets/<%= @snippet.id %>" method="post">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Snippet">
-</form>
+<% if @snippet.user.username == @current_user.username %> 
+    <form action="/snippets/<%= @snippet.id %>" method="post">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Snippet">
+    </form>
 
-<form action="/snippets/<%= @snippet.id %>/edit" method="get">
-    
-    <input type="submit" value="Edit Snippet">
-</form>
-
+    <form action="/snippets/<%= @snippet.id %>/edit" method="get">
+        
+        <input type="submit" value="Edit Snippet">
+    </form>
+<% else %>
+    <p><h4><a href="/messagesuccess">Message <%= @snippet.user.username %> to collaborate.</a></h4></p>
+<% end %>
 
