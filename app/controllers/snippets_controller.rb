@@ -91,7 +91,8 @@ class SnippetsController < ApplicationController
         end
     end
 
-    get '/messagesuccess' do 
+    get '/messagesuccess' do
+        redirect '/login' if !logged_in? 
         @user = current_user
         erb :'/snippets/message-success'
     end

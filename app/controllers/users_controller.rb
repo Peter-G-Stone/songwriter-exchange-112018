@@ -51,12 +51,14 @@ class UsersController < ApplicationController
 
 
     get '/users/:slug' do
+        redirect '/login' if !logged_in?
         @current_user = current_user 
         @user = User.find_by_slug(params[:slug])
         erb :'users/show'
     end
 
     get '/follow/:slug' do 
+        redirect '/login' if !logged_in?
         followed = User.find_by_slug(params[:slug])
         current_user.followed_users << followed
         session[:temp_errors] = ["You have successfully followed #{followed.username}"]
@@ -64,6 +66,7 @@ class UsersController < ApplicationController
     end
 
     get '/unfollow/:slug' do 
+        redirect '/login' if !logged_in?
         followed = User.find_by_slug(params[:slug])
         current_user.followed_users.delete(followed)
         session[:temp_errors] = ["You have successfully unfollowed #{followed.username}"]
