@@ -7,6 +7,9 @@ My app is the beginnings of a forum where fledgling, incomplete compositions can
 * Audio filename - similarly, for audio files
 * Lyrics
 
+Walkthrough video:
+https://youtu.be/zaqJIufcCss
+
 ## Getting Started
 
 Make sure to checkout the gem file and in your terminal, execute 
