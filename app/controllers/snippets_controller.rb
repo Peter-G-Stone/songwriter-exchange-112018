@@ -19,7 +19,8 @@ class SnippetsController < ApplicationController
         snippet = current_user.snippets.build(params)
         
         if snippet.save
-            redirect '/snippets'
+            session[:temp_errors] = ["Your snippet has been saved."]            
+            redirect "/snippets/#{snippet.id}"
         else
             session[:temp_errors] = snippet.errors.full_messages
             redirect '/snippets/new'
@@ -69,6 +70,7 @@ class SnippetsController < ApplicationController
         @snippet = Snippet.find_by_id(params[:id])
         params.delete("_method")
         if @snippet.update(params)
+            session[:temp_errors] = ["Your snippet has been saved."]
             redirect "/snippets/#{@snippet.id}"
         else
             session[:temp_errors] = @snippet.errors.full_messages

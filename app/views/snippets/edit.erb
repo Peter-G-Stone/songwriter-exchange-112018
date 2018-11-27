@@ -1,4 +1,12 @@
 <h1> Edit a Snippet</h1>
+
+<% if session[:temp_errors] %>
+        <% session[:temp_errors].each do |msg| %>
+            <p style="color: red;"><%= msg %></p>
+        <% end %>
+        <% session[:temp_errors] = nil %>
+<% end %>
+
 <h2><%= @snippet.title %></h2>
 <form method="POST" action="/snippets/<%= @snippet.id %>">
     <input type="hidden" id="hidden" name="_method" value="PATCH">
