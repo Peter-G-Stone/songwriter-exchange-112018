@@ -13,7 +13,7 @@
     
     <% if s.user.username != @user.username %>
         <h1>------------------------</h1>
-        <h4><%= s.user.username %></h4>
+        <h4><a href="users/<%= s.user.slug %>"><%= s.user.username %></a></h4>
         
         <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/snippets/<%= s.id %>"><%= s.title %></a></p>
         

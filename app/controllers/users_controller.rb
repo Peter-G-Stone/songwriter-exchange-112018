@@ -50,9 +50,24 @@ class UsersController < ApplicationController
     # -----SHOW PAGE-----
 
 
-    get '/users/:slug' do 
-        @user = User.find_by(username: params[:slug])
+    get '/users/:slug' do
+        @current_user = current_user 
+        @user = User.find_by_slug(params[:slug])
         erb :'users/show'
+    end
+
+    get '/follow/:slug' do 
+        followed = User.find_by_slug(params[:slug])
+        current_user.followed_users << followed
+        session[:temp_errors] = ["You have successfully followed #{followed.username}"]
+        redirect "/users/#{followed.slug}"
+    end
+
+    get '/unfollow/:slug' do 
+        followed = User.find_by_slug(params[:slug])
+        current_user.followed_users.delete(followed)
+        session[:temp_errors] = ["You have successfully unfollowed #{followed.username}"]
+        redirect "/users/#{followed.slug}"
     end
 
 

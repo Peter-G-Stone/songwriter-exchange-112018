@@ -37,3 +37,7 @@ t.save
 
 
 t = annie.snippets.build(title: "oregon", brief: "just a little ditty about the beautiful oregon countryside", chart: "oregon.jpg", audio: "fake-audio-filepath", lyrics: "Big pretty trees, nice mountains, good people, oregon is nice")
+t.save 
+
+t = peter.snippets.build(title: "love song", brief: "ballad vibes, throw in some midi strings", chart: "lovesong.jpg", audio: "fakest-audio-filepath", lyrics: "baby how I love ya yes I do. the moon is pretty but not as pretty as you")
+t.save

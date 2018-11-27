@@ -36,6 +36,7 @@
           <ul>
             <% if logged_in? %>
               <li><a href="/snippets">Browse New Snippets</a></li>
+              <li><a href="/snippets/personalfeed">Browse Your Followed Writers</a></li>
               <li><a href="/users/<%= @user.slug %>">Your Snippets</a></li>
               <li><a href="/snippets/new">Create a Snippet</a></li>
               <li><a href="/logout">Logout</a></li>

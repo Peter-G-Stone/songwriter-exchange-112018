@@ -26,6 +26,18 @@ class SnippetsController < ApplicationController
         end
     end
 
+    get '/snippets/personalfeed' do 
+        redirect '/login' if !logged_in?
+        @user = current_user
+        @snippets = []
+        Snippet.all.each do |s|
+            if @user.followed_users.include? s.user 
+                @snippets << s
+            end
+        end
+        erb :'/snippets/followed-index'
+    end
+
     get '/snippets/:id' do 
         if logged_in?
             @current_user = current_user
@@ -81,4 +93,6 @@ class SnippetsController < ApplicationController
         @user = current_user
         erb :'/snippets/message-success'
     end
+
+    
 end

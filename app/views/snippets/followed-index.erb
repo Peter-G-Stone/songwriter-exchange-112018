@@ -1,31 +1,24 @@
-<h2>SNIPPETS:</h2>
-<h3> by <%= @user.username %></h3>
-<% if @current_user != @user %>
-    <% if !@current_user.followed_users.include?(@user)%>
-        <h3><a href="/follow/<%= @user.slug %>">follow <%= @user.username %></a></h3>
-    <% else %>
-        <h3><a href="/unfollow/<%= @user.slug %>">unfollow <%= @user.username %></a></h3>
-    <% end %>
-<% end %>
-
 <% if session[:temp_errors] %>
         <% session[:temp_errors].each do |msg| %>
             <p style="color: red;"><%= msg %></p>
         <% end %>
         <% session[:temp_errors] = nil %>
+    <% end %>
+
+<h2>SNIPPETS:</h2>
+
+<h4>Welcome, <%= @user.username %>!</h4>
+
+<% if @snippets.empty? %>
+    <h4>You have not followed any writers, or your followed writers have no snippets.</h4>
 <% end %>
-
-
-
-<% if @user.snippets.empty? %>
-    <h4>You have no snippets. Click the link above to create one!</h4>
-<% end %>
-
-<% @user.snippets.reverse_each do |s| %>
-    <h1>------------------------</h1>
-
+<% @snippets.reverse_each do |s| %>
     
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/snippets/<%= s.id %>"><%= s.title %></a></p>
+    <% if s.user.username != @user.username %>
+        <h1>------------------------</h1>
+        <h4><a href="/users/<%= s.user.slug %>"><%= s.user.username %></a></h4>
+        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/snippets/<%= s.id %>"><%= s.title %></a></p>
         
         <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.brief %></p>
         <% if s.chart && !s.chart.empty? %>
@@ -43,7 +36,7 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= s.lyrics %></p>
         <% end %>
 
-        <% if s.user.username != @current_user.username %>
-            <p><h4><a href="/messagesuccess">Message <%= s.user.username %> to collaborate.</a></h4></p>
-        <% end %>
+        <p><h4><a href="/messagesuccess">Message <%= s.user.username %> to collaborate.</a></h4></p>
+    <% end %>
+    
 <% end %>
