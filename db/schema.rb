@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181120141232) do
+ActiveRecord::Schema.define(version: 20181127134419) do
+
+  create_table "followed_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "friend_user_id"
+  end
+
+  add_index "followed_users", ["friend_user_id", "user_id"], name: "index_followed_users_on_friend_user_id_and_user_id", unique: true
+  add_index "followed_users", ["user_id", "friend_user_id"], name: "index_followed_users_on_user_id_and_friend_user_id", unique: true
 
   create_table "snippets", force: :cascade do |t|
     t.string   "title"

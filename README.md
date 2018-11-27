@@ -3,7 +3,7 @@
 My app is the beginnings of a forum where fledgling, incomplete compositions can be shared. Where songwriters can find collaborators and potentially break their blocks by browsing other writers' nascent ideas. Users can create snippets with the following attributes...
 * Title
 * General Description
-* Chart filename - this will turn into an image uploader where one can add images of sheet music
+* Chart filename - currently you can input the filename of a file stored within 'public/images'. This would be an image of sheet music. In the future I'll change this to a real image uploader.
 * Audio filename - similarly, for audio files
 * Lyrics
 
