@@ -16,6 +16,7 @@ class SnippetsController < ApplicationController
     end
 
     post '/snippets' do 
+        binding.pry
         snippet = current_user.snippets.build(params)
         
         if snippet.save
@@ -27,7 +28,7 @@ class SnippetsController < ApplicationController
         end
     end
 
-    get '/snippets/personalfeed' do 
+    get '/snippets/personal-feed' do 
         redirect '/login' if !logged_in?
         @user = current_user
         @snippets = []
@@ -36,6 +37,21 @@ class SnippetsController < ApplicationController
                 @snippets << s
             end
         end
+        erb :'/snippets/followed-index'
+    end
+
+    get '/snippets/search' do 
+        redirect '/login' if !logged_in?
+        @user = current_user
+        @user_results = User.where("username LIKE ?", "%#{params[:query]}%")
+
+        @snippets = []
+
+        Snippet.all.each do |s|
+            @snippets << s if @user_results.include?(s.user)
+        end
+
+        
         erb :'/snippets/followed-index'
     end
 

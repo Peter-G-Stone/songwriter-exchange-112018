@@ -9,6 +9,11 @@
 
 <h4>Welcome, <%= @user.username %>!</h4>
 
+<h4><form method="get" action="snippets/search">
+    <label for="query">Search by username: <input type="text" name="query"></label>
+    <input type="submit" value="search">
+</form></h4>
+
 <% @snippets.reverse_each do |s| %>
     
     <% if s.user.username != @user.username %>

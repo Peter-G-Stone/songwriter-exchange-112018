@@ -61,6 +61,7 @@ class UsersController < ApplicationController
         redirect '/login' if !logged_in?
         followed = User.find_by_slug(params[:slug])
         current_user.followed_users << followed
+        
         session[:temp_errors] = ["You have successfully followed #{followed.username}"]
         redirect "/users/#{followed.slug}"
     end

@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
     has_many :snippets
     has_secure_password
 
-    validates :username, :email, :password, presence: true
+    validates :username, :email, presence: true
 
     validates_uniqueness_of :username, :email, case_sensitive: false
 
@@ -12,7 +12,15 @@ class User < ActiveRecord::Base
       foreign_key: :user_id, 
       association_foreign_key: :friend_user_id
 
+
     
+    #enoch's suggestion for doing friends instead of followers......
+    # has_many :friendships
+
+    # has_many :friends,
+    #     class_name: "User",
+    #     foreign_key: :friend_user_id
+
 
     def slug 
         sloog = self.username.gsub(" ", "-").downcase
