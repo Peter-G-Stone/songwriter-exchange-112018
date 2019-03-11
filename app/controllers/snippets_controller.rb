@@ -16,7 +16,6 @@ class SnippetsController < ApplicationController
     end
 
     post '/snippets' do 
-        binding.pry
         snippet = current_user.snippets.build(params)
         
         if snippet.save
@@ -40,7 +39,7 @@ class SnippetsController < ApplicationController
         erb :'/snippets/followed-index'
     end
 
-    get '/snippets/search' do 
+    post '/snippets/search' do 
         redirect '/login' if !logged_in?
         @user = current_user
         @user_results = User.where("username LIKE ?", "%#{params[:query]}%")
@@ -52,7 +51,7 @@ class SnippetsController < ApplicationController
         end
 
         
-        erb :'/snippets/followed-index'
+        erb :'/snippets/index'
     end
 
     get '/snippets/:id' do 
@@ -100,7 +99,8 @@ class SnippetsController < ApplicationController
             @snippet = Snippet.find_by_id(params[:id])
             @snippet.destroy
             session[:temp_errors] = ["Your snippet was deleted successfully."]
-            redirect '/snippets'
+            slug = user.slug
+            redirect "/users/#{slug}"
         else
             session[:temp_errors] = ["This snippet belongs to another user."]
             redirect '/snippets'

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         @user = User.new(params)
 
         if @user.save  
-            session["user_id"] =  @user.id
+            session["user_id"] =  @user.id # here's creating JWT token, instead of redirecting, sending a response with JSON containing the token
             redirect "/snippets"
         else
             session[:temp_errors] = @user.errors.full_messages
