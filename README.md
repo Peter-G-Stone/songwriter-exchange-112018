@@ -8,7 +8,7 @@ My app is the beginnings of a forum where fledgling, incomplete compositions can
 * Lyrics
 
 Walkthrough video:
-https://youtu.be/zaqJIufcCss
+https://youtu.be/iE6roiZEJ4o
 
 ## Getting Started
 
